@@ -1,8 +1,8 @@
 import Vue from "vue";
 import App from "./App.vue";
-import VueCytoscape from "vue-cytoscape";
+import cytoscape from "cytoscape";
 Vue.config.productionTip = false;
-Vue.use(VueCytoscape);
+Vue.use(cytoscape);
 
 new Vue({
   render: h => h(App)
