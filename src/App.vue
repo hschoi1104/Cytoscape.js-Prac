@@ -8,6 +8,9 @@
     <button v-on:click="add_node_custom()">push</button>
     <br />
     <button v-on:click="remove_node">remove</button>
+    <button v-on:click="log">log</button>
+    <button v-on:click="logElements">Elements</button>
+    <button v-on:click="cyjson">cyjson</button>
     <br />
     <br />
     <div id="cy"></div>
@@ -33,7 +36,15 @@ export default {
           id: ""
         },
         edge: {
-          id: "",
+          source: "",
+          target: ""
+        }
+      },
+      remove: {
+        node: {
+          id: ""
+        },
+        edge: {
           source: "",
           target: ""
         }
@@ -63,13 +74,13 @@ export default {
       this.cy.add([
         {
           group: "nodes",
-          data: { id: this.push.node.id },
-          position: { x: 300, y: 200 }
+          data: { id: this.push.node.id }
+          //position: { x: 300, y: 200 }
         },
         {
           group: "edges",
           data: {
-            //id: this.push.edge.id,
+            id: this.push.edge.id,
             source: this.push.edge.source,
             target: this.push.edge.target
           }
@@ -78,10 +89,45 @@ export default {
     },
     remove_node: function() {
       console.info(this.cy);
+      let ej = this.cy.$("#CAT");
+      this.cy.remove(ej);
+    },
+    remove_node_custom: function() {
+      console.info(this.cy);
       let ej = this.cy.$("#cat");
       this.cy.remove(ej);
     },
-
+    log: function() {
+      console.info(this.cy);
+    },
+    logElements: function() {
+      console.info(this.cy.Core);
+    },
+    cyjson: function() {
+      this.cy.json({
+        elements: {
+          nodes: [
+            { data: { id: "cat" } },
+            { data: { id: "bird" } },
+            { data: { id: "ladybug" } },
+            { data: { id: "aphid" } },
+            { data: { id: "rose" } },
+            { data: { id: "grasshopper" } },
+            { data: { id: "plant" } },
+            { data: { id: "wheat" } }
+          ],
+          edges: [
+            { data: { source: "cat", target: "bird" } },
+            { data: { source: "bird", target: "ladybug" } },
+            { data: { source: "bird", target: "grasshopper" } },
+            { data: { source: "grasshopper", target: "plant" } },
+            { data: { source: "grasshopper", target: "wheat" } },
+            { data: { source: "ladybug", target: "aphid" } },
+            { data: { source: "aphid", target: "rose" } }
+          ]
+        }
+      });
+    },
     view_init: function() {
       this.cy = cytoscape({
         container: document.getElementById("cy"),
@@ -113,21 +159,21 @@ export default {
           nodes: [
             { data: { id: "cat" } },
             { data: { id: "bird" } },
-            { data: { id: "ladybug" } },
-            { data: { id: "aphid" } },
-            { data: { id: "rose" } },
-            { data: { id: "grasshopper" } },
-            { data: { id: "plant" } },
-            { data: { id: "wheat" } }
+            { data: { id: "ladybug" } }
+            //{ data: { id: "aphid" } },
+            //{ data: { id: "rose" } },
+            //{ data: { id: "grasshopper" } },
+            //{ data: { id: "plant" } },
+            //{ data: { id: "wheat" } }
           ],
           edges: [
             { data: { source: "cat", target: "bird" } },
-            { data: { source: "bird", target: "ladybug" } },
-            { data: { source: "bird", target: "grasshopper" } },
-            { data: { source: "grasshopper", target: "plant" } },
-            { data: { source: "grasshopper", target: "wheat" } },
-            { data: { source: "ladybug", target: "aphid" } },
-            { data: { source: "aphid", target: "rose" } }
+            { data: { source: "bird", target: "ladybug" } }
+            //{ data: { source: "bird", target: "grasshopper" } },
+            //{ data: { source: "grasshopper", target: "plant" } },
+            //{ data: { source: "grasshopper", target: "wheat" } },
+            //{ data: { source: "ladybug", target: "aphid" } },
+            //{ data: { source: "aphid", target: "rose" } }
           ]
         },
         layout: {
