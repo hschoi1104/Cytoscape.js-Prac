@@ -3,10 +3,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var connect = require('connect')
+var bodyParser = require('body-parser'); 
+
+
 
 var app = express();
 var config = require('./config.js')
 
+app.use(bodyParser.urlencoded({extended:true})); 
+app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.json());
 //app.use(express.urlencoded({ extended: false }));

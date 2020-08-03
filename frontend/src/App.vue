@@ -12,6 +12,7 @@
     <button v-on:click="logElements">Elements</button>
     <button v-on:click="cyjson">cyjson</button>
     <button v-on:click="apitest">apitest</button>
+    <button v-on:click="writeapitest">writeapitest</button>
     <br />
     <br />
     <div id="cy"></div>
@@ -132,6 +133,12 @@ export default {
     },
     apitest: async function() {
       this.tmp = await axios.get('/dbconn/list')
+      console.log(await axios.get('/dbconn/list'))
+    },
+    writeapitest: async function() {
+      this.tmp = await axios.post('/dbconn/write',{
+        cyjson: this.cy.json()
+      })
       console.log(await axios.get('/dbconn/list'))
     },
     view_init: function() {

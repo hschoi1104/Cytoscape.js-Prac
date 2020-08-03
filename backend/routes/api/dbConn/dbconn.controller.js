@@ -18,7 +18,10 @@ exports.getCyjson = (req, res) =>{
 */
 
 exports.writeCyjson = (req, res) =>{
-    Cyjson.writeCyjson(req.cyjson)
+    cyjson = new Cyjson();
+    cyjson.cyjson = req.body.cyjson;
+    cyjson.save()
+    res.json({cyjson})
 }
 
 
