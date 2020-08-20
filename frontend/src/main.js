@@ -7,7 +7,7 @@ import axios from "axios";
 Vue.config.productionTip = false;
 Vue.use(cytoscape);
 
-axios.defaults.baseURL = '/api/'
+axios.defaults.baseURL = "/api/";
 new Vue({
   router,
   store,
